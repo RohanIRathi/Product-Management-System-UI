@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
 	justify-content: inline;
 	flex-direction: column;
 	margin: 0 auto;
@@ -19,12 +19,12 @@ export const Wrapper = styled.div`
 	}
 
 	Button {
-		margin: 10px 36% 0 auto;
+		margin: 10px auto;
 	}
 `;
 
 export const LongInput = styled.input`
-	width: 95%;
+	width: 100%;
 `;
 
 export const InputGroup = styled.div`
@@ -34,16 +34,16 @@ export const InputGroup = styled.div`
 	justify-content: space-between;
 
 	div {
-		width: 50%;
+		width: 49%;
 	}
 `;
 
 export const ShortInput = styled.input`
-	width: 90%;
+	width: 100%;
 `;
 
 export const DropDown = styled.select`
-	width: 95%;
+	width: 100%;
 	height: 40px;
 	background-color: transparent;
 	border: 1px solid var(--primary);

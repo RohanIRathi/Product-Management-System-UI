@@ -19,7 +19,7 @@ export const Content = styled.div`
 	}
 `;
 
-export const Auth = styled.span`
+export const Auth = styled.div`
 	display: flex;
 	width: 50%;
 	justify-content: end;

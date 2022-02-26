@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 	color: var(--white);
 
 	input {
-		width: 75%;
+		width: 100%;
 		height: 40px;
 		border: 1px solid var(--primary);
 		border-radius: 10px;
@@ -20,7 +20,7 @@ export const Wrapper = styled.div`
 	}
 
 	Button {
-		margin: 10px 26% 0 auto;
+		margin: 10px auto;
 	}
 
 	.error {
