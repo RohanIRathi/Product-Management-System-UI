@@ -5,3 +5,13 @@ export const validEmail = new RegExp(
 export const validMobile = new RegExp(
 	'[0-9]{10}'
 );
+
+export const updateExpireDate = () => {
+	var date = new Date();
+	date.setDate(date.getDate() + 1);
+	localStorage.setItem('expire_date', date);
+};
+
+export const deleteLocalStorage = () => {
+	localStorage.clear();
+};

@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Styles
-import { Wrapper, LongInput, InputGroup, ShortInput, DropDown, Option } from './Register.styles';
+import { Wrapper, LongInput, InputGroup, ShortInput, DropDown, Option, RegistrationForm } from './Register.styles';
 import Button from '../Button';
 
-// Helpers
-import { validEmail, validMobile } from '../../helpers';
+// Hooks
+import { useDistributorsFetch } from '../../hooks/useDistributorsFetch';
 
-// Dummy Data
-const dist_list = ['abc', 'def', 'ghi', 'jkl']
-var error = {}
+// Components
+import Error from '../Error';
+import Spinner from '../Spinner';
+
+// API
+import API from '../../API';
 
 const Register = () => {
+	const { state, loading, setLoading, error } = useDistributorsFetch();
+	const dist_list = state;
+
 	const [username, setUsername] = useState('');
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -21,95 +28,69 @@ const Register = () => {
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [address, setAddress] = useState('');
 	const [distributor, setDistributor] = useState('null');
-	const [errorList, setErrorList] = useState(error);
+	const [errorList, setErrorList] = useState({});
 
-	const checkForErrors = () => {
-		error = {};
-		if(password !== confirmPassword)
-		{
-			error.confirmPassword = "Passwords do not match!";
-			document.getElementById("confirmPassword").style.borderColor="var(--danger)";
-		}
-		if(username === '')
-		{
-			error.username = "Username is required";
-			document.getElementById("username").style.borderColor="var(--danger)";
-		}
-		if(password === '')
-		{
-			error.password = "Password is required";
-			document.getElementById("password").style.borderColor="var(--danger)";
-		}
-		if(firstName === '')
-		{
-			error.firstName = "First Name is required";
-			document.getElementById("firstName").style.borderColor="var(--danger)";
-		}
-		if(lastName === '')
-		{
-			error.lastName = "Last Name is required";
-			document.getElementById("lastName").style.borderColor="var(--danger)";
-		}
-		if(email === '')
-		{
-			error.email = "Email is required";
-			document.getElementById("email").style.borderColor="var(--danger)";
-		}
-		if(mobile === '')
-		{
-			error.mobile = "Mobile No. is required";
-			document.getElementById("mobile").style.borderColor="var(--danger)";
-		}
-		if(address === '')
-		{
-			error.address = "Address is required";
-			document.getElementById("address").style.borderColor="var(--danger)";
-		}
-		if(distributor === 'null')
-		{
-			error.distributor = "Must select distributor";
-			document.getElementById("distributor").style.borderColor="var(--danger)";
-		}
-		setErrorList(error);
-		const isEmpty = Object.keys(error).length === 0;
-		if(!isEmpty) return true;
-		return false;
-	}
+	const navigate = useNavigate();
 
-	const checkEmail = () => {
-		if(!validEmail.test(email))
-		{
-			error.email = "Email is invalid";
-			document.getElementById("email").style.borderColor="var(--danger)";
-			return true;
-		}
-		return false;
-	}
+	if(error) setErrorList({'error': 'Something Went Wrong'});
 
-	const checkMobile = () => {
-		if(!validMobile.test(mobile))
-		{
-			error.mobile = "Please enter a 10-digit Mobile Number";
-			document.getElementById("mobile").style.borderColor="var(--danger)";
-			return true;
-		}
-		return false;
-	}
-
-	const handleSubmit = () => {
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		setLoading(true);
 		var inputCollection = document.getElementsByTagName("input");
 		for (let i = 0; i < inputCollection.length; i++) {
 			inputCollection[i].style.borderColor = "var(--primary)";
 		}
-		if(checkForErrors()) return;
-		if(checkEmail()) return;
-		if(checkMobile()) return;
 
-		console.log("API call");
-		// API
+		if(distributor === 'null') {
+			document.getElementById("distributor").style.borderColor = 'var(--danger)';
+			setErrorList({'distributor': 'Please select a valid distributor'});
+			setLoading(false);
+			return;
+		}
+
+		if(password !== confirmPassword) {
+			var passwords = document.getElementsByClassName("password-input");
+			for(let i = 0; i < passwords.length; i++) {
+				console.log(passwords[0]);
+				passwords[i].title = "Passwords do not match!";
+				passwords[i].style.borderColor = "var(--danger)";
+			}
+			setLoading(false);
+			return;
+		}
+
+		// API call
+		try {
+			const bodyData = {
+				username,
+				email,
+				'password1': password,
+				'password2': confirmPassword,
+				firstName,
+				lastName,
+				address,
+				mobile,
+				'distributorId': distributor,
+			}
+			const result = await API.signup(bodyData);
+			if(!result.success) {
+				setErrorList({'error': result.error});
+				setLoading(false);
+				return;
+			}
+			alert(result.message);
+			navigate('/login/');
+		} catch (error) {
+			console.info(error);
+			setErrorList({'error': error});
+		}
+		console.debug(errorList);
+		setLoading(false);
 	};
 
 	const onChange = (e) => {
+		e.preventDefault();
 		const name = e.target.name;
 		const value = e.target.value;
 
@@ -126,123 +107,140 @@ const Register = () => {
 
 	return (
 		<Wrapper>
-			<label htmlFor="username">Username:</label>
-			<LongInput
-			id="username"
-			type="text"
-			name="username"
-			value={ username }
-			placeholder="Username"
-			onChange={ onChange }
-			error
-			title={ errorList.username }
-			/>
-
-			<InputGroup>
-				<div>
-					<label htmlFor="firstName">First Name:</label>
-					<ShortInput
-					id="firstName"
+			{ loading ?
+				<Spinner /> :
+				<RegistrationForm onSubmit={ handleSubmit }>
+					{ errorList.error ?
+						<Error text={ errorList.error } /> :
+						null
+					}
+					<label htmlFor="username">Username:</label>
+					<LongInput
+					id="username"
 					type="text"
-					name="first_name"
-					value={ firstName }
-					placeholder="First Name"
+					name="username"
+					value={ username }
+					placeholder="Username"
 					onChange={ onChange }
-					title={ errorList.firstName }
+					required
+					title="Enter a unique username"
 					/>
-				</div>
 
-				<div>
-					<label htmlFor="lastName">Last Name:</label>
-					<ShortInput
-					id="lastName"
+					<InputGroup>
+						<div>
+							<label htmlFor="firstName">First Name:</label>
+							<ShortInput
+							id="firstName"
+							type="text"
+							name="first_name"
+							value={ firstName }
+							placeholder="First Name"
+							onChange={ onChange }
+							title="Enter your first name"
+							required
+							/>
+						</div>
+
+						<div>
+							<label htmlFor="lastName">Last Name:</label>
+							<ShortInput
+							id="lastName"
+							type="text"
+							name="last_name"
+							value={ lastName }
+							placeholder="Last Name"
+							onChange={ onChange }
+							title="Enter your last name"
+							required
+							/>
+						</div>
+					</InputGroup>
+
+					<InputGroup>
+						<div>
+							<label htmlFor="email">Email:</label>
+							<ShortInput
+							id="email"
+							type="email"
+							name="email"
+							value={ email }
+							placeholder="Email"
+							onChange={ onChange }
+							pattern="^[a-zA-Z0-9._$!%-]+@[a-zA-Z0-9.-]+.[a-zA-z]$"
+							required
+							/>
+						</div>
+
+						<div>
+							<label htmlFor="mobile">Mobile No.:</label>
+							<ShortInput
+							id="mobile"
+							type="text"
+							name="mobile"
+							value={ mobile }
+							placeholder="Mobile No."
+							onChange={ onChange }
+							title="Enter a 10-digit phone number"
+							pattern="[0-9]{10}"
+							required
+							/>
+						</div>
+					</InputGroup>
+
+					<label htmlFor="address">Address:</label>
+					<LongInput
+					id="address"
 					type="text"
-					name="last_name"
-					value={ lastName }
-					placeholder="Last Name"
+					name="address"
+					value={ address }
+					placeholder="Address"
 					onChange={ onChange }
-					title={ errorList.lastName }
+					title="Enter your shop address"
+					required
 					/>
-				</div>
-			</InputGroup>
 
+					<InputGroup>
+						<div>
+							<label htmlFor="password">Password:</label>
+							<ShortInput
+							id="password"
+							className="password-input"
+							type="password"
+							name="password"
+							value={ password }
+							placeholder="Password"
+							onChange={ onChange }
+							title="Enter your account password"
+							required
+							/>
+						</div>
 
-			<InputGroup>
-				<div>
-					<label htmlFor="email">Email:</label>
-					<ShortInput
-					id="email"
-					type="email"
-					name="email"
-					value={ email }
-					placeholder="Email"
-					onChange={ onChange }
-					title={ errorList.email }
-					/>
-				</div>
+						<div>
+							<label htmlFor="confirmPassword">Confirm Password:</label>
+							<ShortInput
+							id="confirmPassword"
+							className="password-input"
+							type="password"
+							name="confirm_password"
+							value={ confirmPassword }
+							placeholder="Confirm Password"
+							onChange={ onChange }
+							title="Re-enter your password"
+							required
+							/>
+						</div>
+					</InputGroup>
 
-				<div>
-					<label htmlFor="mobile">Mobile No.:</label>
-					<ShortInput
-					id="mobile"
-					type="text"
-					name="mobile"
-					value={ mobile }
-					placeholder="Mobile No."
-					onChange={ onChange }
-					title={ errorList.mobile }
-					pattern="[0-9]{10}"
-					/>
-				</div>
-			</InputGroup>
+					<DropDown id="distributor" defaultValue={distributor} name="distributor" onChange={ onChange } title={ errorList.distributor }>
+						<Option value="null">Select Distributor</Option>
+						{ dist_list.map((distributor, i) => (
+							<Option key={distributor.id} value={distributor.id}>{ distributor.first_name } { distributor.last_name }</Option>
+						)) }
+					</DropDown>
 
-			<label htmlFor="address">Address:</label>
-			<LongInput
-			id="address"
-			type="text"
-			name="address"
-			value={ address }
-			placeholder="Address"
-			onChange={ onChange }
-			title={ errorList.address }
-			/>
-
-			<InputGroup>
-				<div>
-					<label htmlFor="password">Password:</label>
-					<ShortInput
-					id="password"
-					type="password"
-					name="password"
-					value={ password }
-					placeholder="Password"
-					onChange={ onChange }
-					title={ errorList.password }
-					/>
-				</div>
-
-				<div>
-					<label htmlFor="confirmPassword">Confirm Password:</label>
-					<ShortInput
-					id="confirmPassword"
-					type="password"
-					name="confirm_password"
-					value={ confirmPassword }
-					placeholder="Confirm Password"
-					onChange={ onChange }
-					title={ errorList.confirmPassword }
-					/>
-				</div>
-			</InputGroup>
-
-			<DropDown id="distributor" name="distributor" onChange={ onChange } title={ errorList.distributor }>
-				<Option value="null">Select Distributor</Option>
-				{ dist_list.map((distributor, i) => (
-					<Option key={i} value={i}>{ distributor }</Option>
-				)) }
-			</DropDown>
-
-			<Button theme="primary" text="Register" callback={ handleSubmit } />
+					<Button theme="primary" text="Register" type="submit" />
+				</RegistrationForm>
+			}
 		</Wrapper>
 	);
 };

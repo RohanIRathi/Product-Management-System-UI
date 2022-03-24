@@ -21,7 +21,13 @@ export const Wrapper = styled.div`
 	Button {
 		margin: 10px auto;
 	}
+
+	.error-div {
+		width: 50%;
+	}
 `;
+
+export const RegistrationForm = styled.form``;
 
 export const LongInput = styled.input`
 	width: 100%;

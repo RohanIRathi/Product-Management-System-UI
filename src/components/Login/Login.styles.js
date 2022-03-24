@@ -28,3 +28,7 @@ export const Wrapper = styled.div`
 		font-size: var(--fontSmall);
 	}
 `;
+
+export const Form = styled.form`
+	
+`;

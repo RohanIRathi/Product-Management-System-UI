@@ -9,21 +9,28 @@ import Home from './components/Home';
 import Header from './components/Header';
 import Login from './components/Login';
 import Register from './components/Register';
+import Logout from './components/Logout';
 import NotFound from './components/NotFound';
 
 //Global Styles
 import { GlobalStyle } from './GlobalStyle';
 
+// Context
+import UserProvider from './context';
+
 const App = () => (
 	<Router>
-		<Header />
-		<Routes>
-			<Route path="/" element={<Home />}/>
-			<Route path='/register' element={<Register />}/>
-			<Route path='/login' element={<Login />}/>
-			<Route path='/*' element={<NotFound />}/>
-		</Routes>
-		<GlobalStyle />
+		<UserProvider>
+			<Header />
+			<Routes>
+				<Route path='/' element={<Home />}/>
+				<Route path='/register' element={<Register />}/>
+				<Route path='/login' element={<Login />}/>
+				<Route path='/logout' element={<Logout />}/>
+				<Route path='/*' element={<NotFound />}/>
+			</Routes>
+			<GlobalStyle />
+		</UserProvider>
 	</Router>
 );
 
