@@ -31,22 +31,20 @@ const Login = () => {
 	const location = useLocation();
 
 	const from = location.state?.from?.pathname || '/';
-	console.log(from);
 
 	const handleLogin = async (event) => {
 		event.preventDefault();
 		setLoading(true);
-		var inputCollection = document.getElementsByTagName("input");
+		var inputCollection = _user;
+		inputCollection = document.getElementsByTagName("input");
 		for (let i = 0; i < inputCollection.length; i++) {
 			inputCollection[i].style.borderColor = "var(--primary)";
 		}
 
 		// API call
-		console.log("API call");
 		const data = await API.login(username, password);
 		if(data.success)
 		{
-			console.log(data);
 			localStorage.setItem('session_key', data.session_key);
 			localStorage.setItem('session_data', data.session_data);
 			localStorage.setItem('user', JSON.stringify(data.user));
