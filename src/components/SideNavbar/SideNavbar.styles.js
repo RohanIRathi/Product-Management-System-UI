@@ -3,15 +3,25 @@ import styled, { css } from "styled-components";
 export const Wrapper = styled.div`
 	height: 100%;
 	width: 15%;
-	position: fixed;
-	z-index: 1;
 	background-color: var(--dark);
 	transition: 0.5s ease;
 	overflow-x: hidden;
-	padding-top: 20px;
+	padding-top: 5px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+
+	.fontAwesomeIcon {
+		color: var(--white);
+		margin: 10px 20px;
+		align-self: flex-start;
+		cursor: pointer;
+	}
+
+	.closedNavbarIcon {
+		align-self: center;
+		margin: 10px auto;
+	}
 `;
 
 export const Option = styled.a`

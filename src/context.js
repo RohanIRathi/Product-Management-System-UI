@@ -1,9 +1,9 @@
 import React, { useState, createContext } from 'react';
 
 const initialState = {
-	"session_key": localStorage.getItem('session_key'),
-	"user": JSON.parse(localStorage.getItem('user')),
-	"expire_date": new Date(localStorage.getItem('expire_date'))
+	"session_key": sessionStorage.getItem('session_key'),
+	"user": JSON.parse(sessionStorage.getItem('user')),
+	"expire_date": new Date(sessionStorage.getItem('expire_date'))
 };
 
 export const Context = createContext(initialState.user ? initialState : undefined);

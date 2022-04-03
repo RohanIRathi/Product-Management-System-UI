@@ -45,11 +45,11 @@ const Login = () => {
 		const data = await API.login(username, password);
 		if(data.success)
 		{
-			localStorage.setItem('session_key', data.session_key);
-			localStorage.setItem('session_data', data.session_data);
-			localStorage.setItem('user', JSON.stringify(data.user));
+			sessionStorage.setItem('session_key', data.session_key);
+			sessionStorage.setItem('session_data', data.session_data);
+			sessionStorage.setItem('user', JSON.stringify(data.user));
 			updateExpireDate();
-			setUser({"session_key": data.session_key, "user": data.user, "expire_date": new Date(localStorage.getItem('expire_date'))});
+			setUser({"session_key": data.session_key, "user": data.user, "expire_date": new Date(sessionStorage.getItem('expire_date'))});
 			navigate(from, { replace: true });
 		}
 		else

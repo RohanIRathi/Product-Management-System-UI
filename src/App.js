@@ -10,6 +10,8 @@ import Header from './components/Header';
 import Login from './components/Login';
 import Register from './components/Register';
 import Logout from './components/Logout';
+import ViewRetailers from './components/ViewRetailers';
+import AddProduct from './components/AddProduct';
 import NotFound from './components/NotFound';
 
 //Global Styles
@@ -27,6 +29,8 @@ const App = () => (
 				<Route path='/register' element={<Register />}/>
 				<Route path='/login' element={<Login />}/>
 				<Route path='/logout' element={<Logout />}/>
+				<Route path='/viewRetailers' element={<ViewRetailers />}/>
+				<Route path='/addProduct' element={<AddProduct />}/>
 				<Route path='/*' element={<NotFound />}/>
 			</Routes>
 			<GlobalStyle />

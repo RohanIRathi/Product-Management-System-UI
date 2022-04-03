@@ -17,7 +17,7 @@ import API from "../../API";
 const Header = () => {
 	const [user, setUser] = useContext(Context);
 	const navigate = useNavigate();
-	const expire_date = user ? user.expire_date : localStorage.getItem('expire_date');
+	const expire_date = user ? user.expire_date : sessionStorage.getItem('expire_date');
 
 	const handleLogout = () => {
 		API.logout(setUser);

@@ -9,9 +9,9 @@ export const validMobile = new RegExp(
 export const updateExpireDate = () => {
 	var date = new Date();
 	date.setDate(date.getDate() + 1);
-	localStorage.setItem('expire_date', date);
+	sessionStorage.setItem('expire_date', date);
 };
 
-export const deleteLocalStorage = () => {
-	localStorage.clear();
+export const deleteSessionStorage = () => {
+	sessionStorage.clear();
 };

@@ -20,6 +20,7 @@ export const GlobalStyle = createGlobalStyle`
 		--fontBig: 2rem;
 		--fontMed: 1.5rem;
 		--fontSmall: 1rem;
+		--maxWidth: 1280px;
 	}
 
 	* {
