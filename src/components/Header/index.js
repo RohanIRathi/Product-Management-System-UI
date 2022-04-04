@@ -3,6 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 
 // Styles
 import { Wrapper, Content, LogoImg, Auth } from "./Header.styles";
+
+// Components
+import Account from "../Account";
 import Button from "../Button";
 
 // Images
@@ -37,9 +40,7 @@ const Header = () => {
 					<LogoImg src={ YashLogo } alt="Yash Enterprises" />
 				</Link>
 				{ user ?
-					<Auth>
-						<Button theme="danger" text="Logout" callback={ handleLogout } />
-					</Auth>
+					<Account user={ user } />
 					:
 					<Auth>
 						<Link to="/login">

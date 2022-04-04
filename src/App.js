@@ -14,7 +14,7 @@ import ViewRetailers from './components/ViewRetailers';
 import AddProduct from './components/AddProduct';
 import NotFound from './components/NotFound';
 
-//Global Styles
+// Global Styles
 import { GlobalStyle } from './GlobalStyle';
 
 // Context
