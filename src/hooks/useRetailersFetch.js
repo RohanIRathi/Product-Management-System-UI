@@ -12,20 +12,23 @@ export const useRetailersFetch = () => {
 
 	const fetchRetailersList = async () => {
 		const user_id = JSON.parse(sessionStorage.getItem('user'));
-		try {
-			setError(false);
-			setLoading(true);
-			const data = await API.fetchRetailersList(user_id.id);
-			console.log(data);
+		if(user_id.is_superuser && user_id.is_staff) {
+			try {
+				setError(false);
+				setLoading(true);
+				const data = await API.fetchRetailersList();
 
-			if(data.success)
-				setRetailers(data.retailer_list);
-			else
-				throw new Error();
-		} catch (error) {
+				if(data.success)
+					setRetailers(data.retailer_list);
+				else
+					throw new Error();
+			} catch (error) {
+				setError(true);
+			} finally {
+				setLoading(false);
+			}
+		} else {
 			setError(true);
-		} finally {
-			setLoading(false);
 		}
 	};
 

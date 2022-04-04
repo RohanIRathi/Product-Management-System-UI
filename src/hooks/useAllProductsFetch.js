@@ -20,7 +20,6 @@ export const useAllProductsFetch = () => {
 				throw new Error();
 			else
 				setProducts(data.products_list);
-			console.log(data);
 		} catch (error) {
 			setError(true);
 		} finally {

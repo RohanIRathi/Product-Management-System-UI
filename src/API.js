@@ -27,15 +27,13 @@ const apiFunctions = {
 				body: JSON.stringify(bodyData)
 			})
 			.then(response => {
-				if(!response.ok)
-					return {"success": false, "error": "Something Went Wrong"};
 				return response.json();
 			})
 			.then(data => {
 				return data;
 			})
 		);
-
+		
 		return data;
 	},
 	logout: async(setUser) => {

@@ -31,11 +31,11 @@ const Account = ({ user }) => {
 					</span>
 				</Profile>
 				<ProfileOptions toggled={ toggled }>
-					<Link to="/" className="dropdown-item">
+					<Link to="/viewProfile" className="dropdown-item" onClick={ toggleDropdown }>
 						<FontAwesomeIcon className="icon" icon={ faIdBadge } />
 						View Profile
 					</Link>
-					<Link to="/logout" className="dropdown-item">
+					<Link to="/logout" className="dropdown-item" onClick={ toggleDropdown }>
 						<FontAwesomeIcon className="icon" icon={ faRightFromBracket } />
 						Logout
 					</Link>
