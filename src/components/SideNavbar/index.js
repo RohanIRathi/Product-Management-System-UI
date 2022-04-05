@@ -30,7 +30,7 @@ const SideNavbar = (props) => {
 				<Option href="/" active={ props.home }>Home</Option>
 				<Option href="/viewRetailers" active={ props.viewRetailers }>View Retailers</Option>
 				<Option href="/addRetailer" active={ props.addRetailer }>Add Retailer</Option>
-				<Option href="/manageOrders" active={ props.manageOrders }>Manage Orders</Option>
+				<Option href="/viewOrders" active={ props.viewOrders }>View Orders</Option>
 				<Option href="/products" active={ props.products }>Products</Option>
 				<Option href="/addProduct" active={ props.addProduct }>Add Product</Option>
 			</Wrapper>
@@ -40,7 +40,7 @@ const SideNavbar = (props) => {
 				<Option href="/" active={ props.home }><FontAwesomeIcon icon={ faHome } /></Option>
 				<Option href="/viewRetailers" active={ props.viewRetailers }><FontAwesomeIcon icon={ faUsers } /></Option>
 				<Option href="/addRetailer" active={ props.addRetailer }><FontAwesomeIcon icon={ faUserPlus } /></Option>
-				<Option href="/manageOrders" active={ props.manageOrders }><FontAwesomeIcon icon={ faReceipt } /></Option>
+				<Option href="/viewOrders" active={ props.viewOrders }><FontAwesomeIcon icon={ faReceipt } /></Option>
 				<Option href="/products" active={ props.products }><FontAwesomeIcon icon={ faMobileAlt } /></Option>
 				<Option href="/addProduct" active={ props.addProduct }><FontAwesomeIcon icon={ faSquarePlus } /></Option>
 			</Wrapper>

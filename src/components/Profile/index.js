@@ -80,6 +80,10 @@ const Profile = ({ user }) => {
 					:
 					<>
 						<Data>
+							<DataTitle>Distributor:</DataTitle>
+							<DataItem>{ user.distributor.first_name } { user.distributor.last_name }</DataItem>
+						</Data>
+						<Data>
 							<DataTitle>Credit Limit:</DataTitle>
 							<DataItem>{ user.credit_limit }</DataItem>
 						</Data>

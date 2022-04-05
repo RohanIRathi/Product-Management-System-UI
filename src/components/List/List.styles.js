@@ -16,4 +16,8 @@ export const Content = styled.ul`
 		padding: 5px 20px;
 		font-size: var(--fontMed);
 	}
+
+	.title-text:last-of-type {
+		text-align: end;
+	}
 `;

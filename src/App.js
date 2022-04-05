@@ -13,6 +13,7 @@ import Logout from './components/Logout';
 import ViewRetailers from './components/ViewRetailers';
 import AddProduct from './components/AddProduct';
 import ViewProfile from './components/ViewProfile';
+import ViewOrders from './components/ViewOrders';
 import NotFound from './components/NotFound';
 
 // Global Styles
@@ -33,6 +34,7 @@ const App = () => (
 				<Route path='/viewRetailers' element={<ViewRetailers />}/>
 				<Route path='/addProduct' element={<AddProduct />}/>
 				<Route path='/viewProfile' element={<ViewProfile />} />
+				<Route path='/viewOrders' element={<ViewOrders />}/>
 				<Route path='/*' element={<NotFound />}/>
 			</Routes>
 			<GlobalStyle />

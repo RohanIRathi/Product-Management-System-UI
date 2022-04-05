@@ -4,7 +4,8 @@ import {
 	SIGNUP_URL,
 	FETCH_ALL_PRODUCTS_URL,
 	FETCH_RETAILERS_LIST_URL,
-	ADD_PRODUCT_URL
+	ADD_PRODUCT_URL,
+	FETCH_DISTRIBUTOR_ORDERS_URL
 } from './config';
 
 const defaultConfig = {
@@ -129,6 +130,27 @@ const apiFunctions = {
 			));
 
 			return data;
+	},
+	fetchDistributorOrders: async () => {
+		const session_data = sessionStorage.getItem('session_data');
+		const data = await(
+			await(fetch(FETCH_DISTRIBUTOR_ORDERS_URL, {
+				headers: {
+					'Session': session_data
+				}
+			})
+			.then(response => {
+				return response.json();
+			})
+			.then(data => {
+				return data;
+			}))
+		);
+
+		if(!data.success) {
+			return {'success': false, 'error': data.error || 'Something Went Wrong'};
+		}
+		return data;
 	}
 };
 

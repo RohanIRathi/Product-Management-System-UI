@@ -8,10 +8,9 @@ const List = ({ children }) => {
 		<Wrapper>
 			<Content>
 				<div className="title">
-					<span>Retailer</span>
-					<span>Pending Amount</span>
+					{ children[0] }
 				</div>
-				<div>{ children }</div>
+				<div>{ children[1] }</div>
 			</Content>
 		</Wrapper>
 	)

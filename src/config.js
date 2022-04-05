@@ -10,6 +10,7 @@ const SIGNUP_URL = `${API_URL}/signup/`;
 const FETCH_DISTRIBUTORSLIST_URL = `${API_URL}/getDistributorsList/`;
 const FETCH_ALL_PRODUCTS_URL = `${API_URL}/products/getAllProducts/`;
 const FETCH_RETAILERS_LIST_URL = `${API_URL}/getAllRetailers/`;
+const FETCH_DISTRIBUTOR_ORDERS_URL = `${API_URL}/orders/getDistributorOrders/`;
 
 // POST data
 const ADD_PRODUCT_URL = `${API_URL}/products/addProduct/`;
@@ -21,5 +22,6 @@ export {
 	SIGNUP_URL,
 	FETCH_ALL_PRODUCTS_URL,
 	FETCH_RETAILERS_LIST_URL,
-	ADD_PRODUCT_URL
+	ADD_PRODUCT_URL,
+	FETCH_DISTRIBUTOR_ORDERS_URL
 };
