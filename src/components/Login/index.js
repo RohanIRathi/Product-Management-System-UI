@@ -41,20 +41,25 @@ const Login = () => {
 			inputCollection[i].style.borderColor = "var(--primary)";
 		}
 
-		// API call
-		const data = await API.login(username, password);
-		if(data.success)
-		{
-			sessionStorage.setItem('session_key', data.session_key);
-			sessionStorage.setItem('session_data', data.session_data);
-			sessionStorage.setItem('user', JSON.stringify(data.user));
-			updateExpireDate();
-			setUser({"session_key": data.session_key, "user": data.user, "expire_date": new Date(sessionStorage.getItem('expire_date'))});
-			navigate(from, { replace: true });
-		}
-		else
-		{
-			setErrorList({invalidCredentials: data.error});
+		try {
+			// API call
+			const data = await API.login(username, password);
+			if(data.success)
+			{
+				sessionStorage.setItem('session_key', data.session_key);
+				sessionStorage.setItem('session_data', data.session_data);
+				sessionStorage.setItem('user', JSON.stringify(data.user));
+				updateExpireDate();
+				setUser({"session_key": data.session_key, "user": data.user, "expire_date": new Date(sessionStorage.getItem('expire_date'))});
+				navigate(from, { replace: true });
+			}
+			else
+			{
+				setErrorList({invalidCredentials: data.error});
+			}
+		} catch (err) {
+			setErrorList({invalidCredentials: "Something Went Wrong"});
+		} finally {
 			setLoading(false);
 		}
 	};

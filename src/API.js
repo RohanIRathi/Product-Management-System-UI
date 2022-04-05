@@ -34,7 +34,7 @@ const apiFunctions = {
 				return data;
 			})
 		);
-		
+
 		return data;
 	},
 	logout: async(setUser) => {
