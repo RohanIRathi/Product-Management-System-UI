@@ -8,11 +8,11 @@ const ListItem = (props) => {
 	<a href="#">
 		<Item>
 			<span style={{ 'width': '50%' }}>{ props.retailer.first_name } { props.retailer.last_name }</span>
-			<span style={{ 'width': '50%' }}>{ props.retailer.pending_amount }</span>
+			<span style={{ 'width': '50%' }}>{ props.retailer.pendingAmount }</span>
 		</Item>
 	</a>
 	: props.order ?
-	<a style={{ 'textDecoration': 'none' }} href="#">
+	<a style={{ 'textDecoration': 'none' }} href={ "/viewOrder/" + props.order.id }>
 		<Item>
 			<span style={{ 'width': '33%' }}>{ new Date(props.order.order_date).toLocaleString() }</span>
 			<span style={{ 'width': '33%' }}>{ props.order.retailer.first_name } { props.order.retailer.last_name }</span>

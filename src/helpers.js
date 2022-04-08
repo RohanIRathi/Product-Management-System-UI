@@ -15,3 +15,12 @@ export const updateExpireDate = () => {
 export const deleteSessionStorage = () => {
 	sessionStorage.clear();
 };
+
+export const calculateProductTotal = (product) => {
+	const quantity = product.quantity;
+	const discount = product.discount;
+	const price = product.product.price;
+	const product_total = quantity * price;
+
+	return product_total - (product_total * 0.01 * discount);
+};

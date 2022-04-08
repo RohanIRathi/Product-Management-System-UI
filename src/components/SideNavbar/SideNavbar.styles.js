@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
 
 export const Wrapper = styled.div`
-	height: 100%;
 	width: 15%;
 	background-color: var(--dark);
 	transition: 0.5s ease;

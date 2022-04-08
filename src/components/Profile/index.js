@@ -74,7 +74,7 @@ const Profile = ({ user }) => {
 					<Data>
 						<DataTitle>Retailers:</DataTitle>
 						<DataItem>
-							{ retailers.length } <a href='/viewRetailer'>(View All)</a>
+							{ retailers.length } <a href='/viewRetailers'>(View All)</a>
 						</DataItem>
 					</Data>
 					:

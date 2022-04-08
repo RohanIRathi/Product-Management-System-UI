@@ -20,6 +20,11 @@ import ListItem from './ListItem';
 // Styles
 import { Wrapper } from './Wrapper/Wrapper.styles';
 
+const titles = [
+	"Retailer",
+	"Pending Amount"
+];
+
 const ViewRetailers = () => {
 	const navigate = useNavigate();
 	const [user, setUser] = useContext(Context);
@@ -42,6 +47,9 @@ const ViewRetailers = () => {
 		<Wrapper>
 			<SideNavbar viewRetailers />
 			<List>
+				{ titles.map((title, key) => (
+					<div style={{ 'width': (100/titles.length).toString() + "%" }} className="title-text" key={ key }>{ title }</div>
+				))}
 				{ retailers.map(retailer => (
 					<ListItem retailer={ retailer } key={ retailer.id } />
 				))}

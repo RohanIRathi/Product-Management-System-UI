@@ -5,7 +5,8 @@ import {
 	FETCH_ALL_PRODUCTS_URL,
 	FETCH_RETAILERS_LIST_URL,
 	ADD_PRODUCT_URL,
-	FETCH_DISTRIBUTOR_ORDERS_URL
+	FETCH_DISTRIBUTOR_ORDERS_URL,
+	API_URL
 } from './config';
 
 const defaultConfig = {
@@ -150,6 +151,21 @@ const apiFunctions = {
 		if(!data.success) {
 			return {'success': false, 'error': data.error || 'Something Went Wrong'};
 		}
+		return data;
+	},
+	fetchOrderDetails: async (order_id) => {
+		const FETCH_ORDER_DETAILS_URL = `${API_URL}/orders/fetchOrderDetails/${order_id}/`;
+
+		const data = await(
+			await fetch(FETCH_ORDER_DETAILS_URL)
+			.then(response => {
+				return response.json();
+			})
+			.then(data => {
+				return data;
+			})
+		);
+
 		return data;
 	}
 };
