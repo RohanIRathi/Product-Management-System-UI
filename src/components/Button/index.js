@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 // Styles
 import { Wrapper } from "./Button.styles";
 
-const Button = ({ theme, text, callback, type }) => {
+const Button = ({ className, theme, text, callback, type }) => {
 
-	return <Wrapper theme={ theme } type={ type ? type : "button" } onClick={callback}>{ text }</Wrapper>;
+	return <Wrapper className={ className } theme={ theme } type={ type ? type : "button" } onClick={callback}>{ text }</Wrapper>;
 };
 
 Button.propTypes = {

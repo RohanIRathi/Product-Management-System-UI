@@ -24,3 +24,5 @@ export const calculateProductTotal = (product) => {
 
 	return product_total - (product_total * 0.01 * discount);
 };
+
+export class CustomError extends Error {};

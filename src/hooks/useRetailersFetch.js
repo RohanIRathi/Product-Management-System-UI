@@ -28,6 +28,7 @@ export const useRetailersFetch = () => {
 				setLoading(false);
 			}
 		} else {
+			setRetailers([user_id]);
 			setError(true);
 		}
 	};

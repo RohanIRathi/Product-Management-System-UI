@@ -10,14 +10,15 @@ import {
 	faUserPlus,
 	faReceipt,
 	faMobileAlt,
-	faSquarePlus
+	faSquarePlus,
+	faBarcode
 } from '@fortawesome/free-solid-svg-icons'
 
 // Styles
 import { Wrapper, Option } from "./SideNavbar.styles";
 
 const SideNavbar = (props) => {
-	const [ expanded, setExpanded ] = useState(true);
+	const [ expanded, setExpanded ] = useState(false);
 
 	const toggleSideNavbar = () => {
 		setExpanded(!expanded);
@@ -31,6 +32,7 @@ const SideNavbar = (props) => {
 				<Option href="/viewRetailers" active={ props.viewRetailers }>View Retailers</Option>
 				<Option href="/addRetailer" active={ props.addRetailer }>Add Retailer</Option>
 				<Option href="/viewOrders" active={ props.viewOrders }>View Orders</Option>
+				<Option href="/addOrder" active = { props.createOrder }>Create Order</Option>
 				<Option href="/products" active={ props.products }>Products</Option>
 				<Option href="/addProduct" active={ props.addProduct }>Add Product</Option>
 			</Wrapper>
@@ -41,6 +43,7 @@ const SideNavbar = (props) => {
 				<Option href="/viewRetailers" active={ props.viewRetailers }><FontAwesomeIcon icon={ faUsers } /></Option>
 				<Option href="/addRetailer" active={ props.addRetailer }><FontAwesomeIcon icon={ faUserPlus } /></Option>
 				<Option href="/viewOrders" active={ props.viewOrders }><FontAwesomeIcon icon={ faReceipt } /></Option>
+				<Option href="/addOrder" active={ props.createOrder }><FontAwesomeIcon icon={ faBarcode } /></Option>
 				<Option href="/products" active={ props.products }><FontAwesomeIcon icon={ faMobileAlt } /></Option>
 				<Option href="/addProduct" active={ props.addProduct }><FontAwesomeIcon icon={ faSquarePlus } /></Option>
 			</Wrapper>

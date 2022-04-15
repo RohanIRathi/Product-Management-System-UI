@@ -31,6 +31,7 @@ const Login = () => {
 	const location = useLocation();
 
 	const from = location.state?.from?.pathname || '/';
+	const search = location.state?.from?.search || '';
 
 	const handleLogin = async (event) => {
 		event.preventDefault();
@@ -51,7 +52,7 @@ const Login = () => {
 				sessionStorage.setItem('user', JSON.stringify(data.user));
 				updateExpireDate();
 				setUser({"session_key": data.session_key, "user": data.user, "expire_date": new Date(sessionStorage.getItem('expire_date'))});
-				navigate(from, { replace: true });
+				navigate(from+search, { replace: true });
 			}
 			else
 			{

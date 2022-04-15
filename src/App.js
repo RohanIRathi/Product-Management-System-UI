@@ -15,6 +15,8 @@ import AddProduct from './components/AddProduct';
 import ViewProfile from './components/ViewProfile';
 import ViewOrders from './components/ViewOrders';
 import ViewOrder from './components/ViewOrder';
+import CreateOrder from './components/CreateOrder';
+import VerifyAccount from './components/VerifyAccount';
 import NotFound from './components/NotFound';
 
 // Global Styles
@@ -37,6 +39,8 @@ const App = () => (
 				<Route path='/viewProfile' element={<ViewProfile />} />
 				<Route path='/viewOrders' element={<ViewOrders />}/>
 				<Route path='/viewOrder/:order_id' element={<ViewOrder />}/>
+				<Route path='/addOrder' element={<CreateOrder />}/>
+				<Route path='/verifyAccount' element={<VerifyAccount />}/>
 				<Route path='/*' element={<NotFound />}/>
 			</Routes>
 			<GlobalStyle />

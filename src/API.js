@@ -6,7 +6,9 @@ import {
 	FETCH_RETAILERS_LIST_URL,
 	ADD_PRODUCT_URL,
 	FETCH_DISTRIBUTOR_ORDERS_URL,
-	API_URL
+	API_URL,
+	ADD_ORDER_URL,
+	FETCH_VERIFICATION_DETAILS_URL
 } from './config';
 
 const defaultConfig = {
@@ -164,6 +166,54 @@ const apiFunctions = {
 			.then(data => {
 				return data;
 			})
+		);
+
+		return data;
+	},
+	addOrder: async(order) => {
+		const data = await(
+			await(fetch(ADD_ORDER_URL, {
+				...defaultConfig,
+				body: JSON.stringify(order)
+			}))
+			.then(response => {
+				return response.json();
+			})
+			.then(data => {
+				return data;
+			})
+		)
+
+		if(!data.success)
+			return {'success': false, 'error': data.error || "Something Went Wrong"};
+		return data;
+	},
+	fetchVerificationDetails: async(token) => {
+		const data = await(
+			await(fetch(FETCH_VERIFICATION_DETAILS_URL + token, {
+				'headers': {
+					'Session': sessionStorage.getItem('session_data')
+				}
+			})
+			.then(response => {
+				return response.json();
+			}))
+		);
+		return data;
+	},
+	acceptRetailer: async(bodyData, token) => {
+		const data = await(
+			await(fetch(FETCH_VERIFICATION_DETAILS_URL+token, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Session': sessionStorage.getItem('session_data')
+				},
+				body: JSON.stringify(bodyData)
+			})
+			.then(response => {
+				return response.json();
+			}))
 		);
 
 		return data;

@@ -11,9 +11,11 @@ const FETCH_DISTRIBUTORSLIST_URL = `${API_URL}/getDistributorsList/`;
 const FETCH_ALL_PRODUCTS_URL = `${API_URL}/products/getAllProducts/`;
 const FETCH_RETAILERS_LIST_URL = `${API_URL}/getAllRetailers/`;
 const FETCH_DISTRIBUTOR_ORDERS_URL = `${API_URL}/orders/getDistributorOrders/`;
+const FETCH_VERIFICATION_DETAILS_URL = `${API_URL}/verifyAccount?token=`;
 
 // POST data
 const ADD_PRODUCT_URL = `${API_URL}/products/addProduct/`;
+const ADD_ORDER_URL = `${API_URL}/orders/addOrder/`;
 
 export {
 	API_URL,
@@ -23,5 +25,7 @@ export {
 	FETCH_ALL_PRODUCTS_URL,
 	FETCH_RETAILERS_LIST_URL,
 	ADD_PRODUCT_URL,
-	FETCH_DISTRIBUTOR_ORDERS_URL
+	FETCH_DISTRIBUTOR_ORDERS_URL,
+	ADD_ORDER_URL,
+	FETCH_VERIFICATION_DETAILS_URL
 };
