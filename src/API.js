@@ -8,7 +8,8 @@ import {
 	FETCH_DISTRIBUTOR_ORDERS_URL,
 	API_URL,
 	ADD_ORDER_URL,
-	FETCH_VERIFICATION_DETAILS_URL
+	FETCH_VERIFICATION_DETAILS_URL,
+	CHANGE_PASSWORD_URL
 } from './config';
 
 const defaultConfig = {
@@ -211,6 +212,27 @@ const apiFunctions = {
 				},
 				body: JSON.stringify(bodyData)
 			})
+			.then(response => {
+				return response.json();
+			}))
+		);
+
+		return data;
+	},
+	changePassword: async(bodyData) => {
+		const session_data = sessionStorage.getItem('session_data');
+
+		const params = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Session': session_data
+			},
+			body: JSON.stringify(bodyData)
+		};
+
+		const data = await(
+			await(fetch(CHANGE_PASSWORD_URL, params)
 			.then(response => {
 				return response.json();
 			}))

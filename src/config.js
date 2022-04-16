@@ -16,6 +16,7 @@ const FETCH_VERIFICATION_DETAILS_URL = `${API_URL}/verifyAccount?token=`;
 // POST data
 const ADD_PRODUCT_URL = `${API_URL}/products/addProduct/`;
 const ADD_ORDER_URL = `${API_URL}/orders/addOrder/`;
+const CHANGE_PASSWORD_URL = `${API_URL}/changePassword/`;
 
 export {
 	API_URL,
@@ -27,5 +28,6 @@ export {
 	ADD_PRODUCT_URL,
 	FETCH_DISTRIBUTOR_ORDERS_URL,
 	ADD_ORDER_URL,
-	FETCH_VERIFICATION_DETAILS_URL
+	FETCH_VERIFICATION_DETAILS_URL,
+	CHANGE_PASSWORD_URL
 };

@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const Wrapper = styled.div`
 	width: 15%;
 	background-color: var(--dark);
-	transition: 0.5s ease;
+	transition: 0.2s ease;
 	overflow-x: hidden;
 	padding-top: 5px;
 	display: flex;
@@ -15,6 +15,10 @@ export const Wrapper = styled.div`
 		margin: 10px 20px;
 		align-self: flex-start;
 		cursor: pointer;
+
+		:hover {
+			opacity: 0.8;
+		}
 	}
 
 	.closedNavbarIcon {

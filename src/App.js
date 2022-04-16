@@ -17,6 +17,7 @@ import ViewOrders from './components/ViewOrders';
 import ViewOrder from './components/ViewOrder';
 import CreateOrder from './components/CreateOrder';
 import VerifyAccount from './components/VerifyAccount';
+import ChangePassword from './components/ChangePassword';
 import NotFound from './components/NotFound';
 
 // Global Styles
@@ -41,6 +42,7 @@ const App = () => (
 				<Route path='/viewOrder/:order_id' element={<ViewOrder />}/>
 				<Route path='/addOrder' element={<CreateOrder />}/>
 				<Route path='/verifyAccount' element={<VerifyAccount />}/>
+				<Route path='/changePassword' element={<ChangePassword />}/>
 				<Route path='/*' element={<NotFound />}/>
 			</Routes>
 			<GlobalStyle />

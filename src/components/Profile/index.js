@@ -16,6 +16,7 @@ import {
 // Components
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
+import Spinner from '../Spinner';
 
 // Hooks
 import { useRetailersFetch } from '../../hooks/useRetailersFetch';
@@ -29,7 +30,9 @@ import { useRetailersFetch } from '../../hooks/useRetailersFetch';
 const Profile = ({ user }) => {
 	const { retailers, error, loading } = useRetailersFetch();
 
-	return (
+	return ( loading ?
+		<Spinner />
+		:
 		<Wrapper>
 			<Content>
 				<Info>
@@ -67,7 +70,7 @@ const Profile = ({ user }) => {
 					<Data>
 						<DataTitle>Password:</DataTitle>
 						<DataItem>
-							<a href="#">Change Password</a>
+							<a href="/changePassword">Change Password</a>
 						</DataItem>
 					</Data>
 					{ user.is_superuser && user.is_staff && retailers && !error ? 
