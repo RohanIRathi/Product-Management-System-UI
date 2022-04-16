@@ -5,8 +5,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import SideNavbar from "./SideNavbar";
 import Error from "./Error";
 import Spinner from "./Spinner";
-import Grid from "./Grid";
-import Card from "./Card";
+import Products from './Products';
 
 // Styles
 import { Wrapper } from "./Wrapper/Wrapper.styles";
@@ -32,11 +31,7 @@ const Home = () => {
 			:
 			<Wrapper>
 				<SideNavbar home />
-				<Grid>
-				{ products.map((product) => (
-					<Card product={ product } key={ product.id } />
-				)) }
-				</Grid>
+				<Products products={ products } />
 			</Wrapper>
 	);
 };
