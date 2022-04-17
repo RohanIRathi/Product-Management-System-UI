@@ -26,3 +26,13 @@ export const calculateProductTotal = (product) => {
 };
 
 export class CustomError extends Error {};
+
+export const increaseOrders = (orderList, orders, page) => {
+	if(page === 1) {
+		return orders.slice(0, 9);
+	}
+	const start = (page - 1) * 10;
+	const end = (page * 10) - 1;
+
+	return [...orderList, orders.slice(start, end)];
+}

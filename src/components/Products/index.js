@@ -5,6 +5,7 @@ import { Wrapper, Content } from "./Products.styles";
 
 // Components
 import Grid from "../Grid";
+import Card from "../Card";
 
 const Products = ({ products }) => {
 
@@ -19,4 +20,6 @@ const Products = ({ products }) => {
 			</Content>
 		</Wrapper>
 	);
-}
+};
+
+export default Products;

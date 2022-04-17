@@ -19,6 +19,7 @@ import CreateOrder from './components/CreateOrder';
 import VerifyAccount from './components/VerifyAccount';
 import ChangePassword from './components/ChangePassword';
 import ViewProducts from './components/ViewProducts';
+import ViewRetailer from './components/ViewRetailer';
 import NotFound from './components/NotFound';
 
 // Global Styles
@@ -45,6 +46,7 @@ const App = () => (
 				<Route path='/verifyAccount' element={<VerifyAccount />}/>
 				<Route path='/changePassword' element={<ChangePassword />}/>
 				<Route path='/products' element={<ViewProducts />}/>
+				<Route path='/viewRetailer/:user_id' element={<ViewRetailer />}/>
 				<Route path='/*' element={<NotFound />}/>
 			</Routes>
 			<GlobalStyle />

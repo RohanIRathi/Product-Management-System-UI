@@ -15,7 +15,7 @@ export const useOrdersFetch = () => {
 			setLoading(true);
 			setError(false);
 
-			const data = await (API.fetchDistributorOrders());
+			const data = await (API.fetchDistributorOrders({}));
 			if(!data.success) throw new Error();
 			else setOrders(data.orders);
 		} catch (err) {

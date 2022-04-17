@@ -9,7 +9,8 @@ import {
 	API_URL,
 	ADD_ORDER_URL,
 	FETCH_VERIFICATION_DETAILS_URL,
-	CHANGE_PASSWORD_URL
+	CHANGE_PASSWORD_URL,
+	FETCH_RETAILER_DETAILS_URL
 } from './config';
 
 const defaultConfig = {
@@ -135,10 +136,13 @@ const apiFunctions = {
 
 			return data;
 	},
-	fetchDistributorOrders: async () => {
+	fetchDistributorOrders: async (props) => {
+		const URL = props.user_id ?
+			FETCH_DISTRIBUTOR_ORDERS_URL+'/?retailer='+props.user_id
+			: FETCH_DISTRIBUTOR_ORDERS_URL+'/';
 		const session_data = sessionStorage.getItem('session_data');
 		const data = await(
-			await(fetch(FETCH_DISTRIBUTOR_ORDERS_URL, {
+			await(fetch(URL, {
 				headers: {
 					'Session': session_data
 				}
@@ -236,6 +240,24 @@ const apiFunctions = {
 			.then(response => {
 				return response.json();
 			}))
+		);
+
+		return data;
+	},
+	fetchRetailerDetails: async(user_id) => {
+		const session_data = sessionStorage.getItem('session_data');
+		const url = `${FETCH_RETAILER_DETAILS_URL}${user_id}/`;
+
+		const data = await(
+			await(fetch(url, {
+				method: 'GET',
+				headers: {
+					'Session': session_data
+				}
+			}))
+			.then(response => {
+				return response.json();
+			})
 		);
 
 		return data;

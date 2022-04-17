@@ -5,7 +5,7 @@ import { Item } from "./ListItem.styles";
 
 const ListItem = (props) => {
 	const data = props.retailer ?
-	<a href="#">
+	<a href={ "/viewRetailer/" + props.retailer.id }>
 		<Item>
 			<span style={{ 'width': '50%' }}>{ props.retailer.first_name } { props.retailer.last_name }</span>
 			<span style={{ 'width': '50%' }}>{ props.retailer.pendingAmount }</span>

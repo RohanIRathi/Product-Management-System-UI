@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
 
 	.fontAwesomeIcon {
 		color: var(--white);
-		margin: 10px 20px;
+		margin: 10px 25px;
 		align-self: flex-start;
 		cursor: pointer;
 
