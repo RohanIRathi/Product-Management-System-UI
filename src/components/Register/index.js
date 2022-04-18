@@ -84,6 +84,7 @@ const Register = () => {
 		} catch (error) {
 			setErrorList({'error': error});
 		}
+		console.log(errorList);
 		setLoading(false);
 	};
 
