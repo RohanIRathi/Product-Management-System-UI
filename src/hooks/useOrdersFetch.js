@@ -10,12 +10,28 @@ export const useOrdersFetch = () => {
 	const [error, setError] = useState(false);
 	const [loading, setLoading] = useState(false);
 
-	const fetchDistributorOrders = async () => {
+	const fetchDistributorOrders = async (props) => {
+		console.log(props);
 		try {
 			setLoading(true);
 			setError(false);
 
-			const data = await (API.fetchDistributorOrders({}));
+			const data = await (API.fetchDistributorOrders(props));
+			if(!data.success) throw new Error();
+			else setOrders(data.orders);
+		} catch (err) {
+			setError(true);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	const fetchRetailerOrders = async (props) => {
+		try {
+			setLoading(true);
+			setError(false);
+
+			const data = await (API.fetchRetailerOrders(props));
 			if(!data.success) throw new Error();
 			else setOrders(data.orders);
 		} catch (err) {
@@ -28,7 +44,9 @@ export const useOrdersFetch = () => {
 	useEffect(() => {
 		const user = JSON.parse(sessionStorage.getItem('user'));
 		if(user && user.is_superuser && user.is_staff)
-			fetchDistributorOrders();
+			fetchDistributorOrders({});
+		else if(user && !user.is_superuser && user.is_staff)
+			fetchRetailerOrders({});
 	}, []);
 
 	return { orders, error, loading };

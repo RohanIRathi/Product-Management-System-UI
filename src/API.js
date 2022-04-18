@@ -11,7 +11,8 @@ import {
 	FETCH_VERIFICATION_DETAILS_URL,
 	CHANGE_PASSWORD_URL,
 	FETCH_RETAILER_DETAILS_URL,
-	ORDER_PAID_URL
+	ORDER_PAID_URL,
+	FETCH_RETAILER_ORDERS_URL
 } from './config';
 
 const defaultConfig = {
@@ -267,6 +268,24 @@ const apiFunctions = {
 		const session_data = sessionStorage.getItem('session_data');
 		const data = await(
 			await(fetch(ORDER_PAID_URL+order_id, {
+				headers: {
+					'Session': session_data
+				}
+			}))
+			.then(response => {
+				return response.json();
+			})
+		);
+
+		return data;
+	},
+	fetchRetailerOrders: async(props) => {
+		const session_data = sessionStorage.getItem('session_data');
+		const URL = props.user_id ?
+			FETCH_RETAILER_ORDERS_URL + '?distributor=' + props.user_id
+			: FETCH_RETAILER_ORDERS_URL;
+		const data = await(
+			await(fetch(URL, {
 				headers: {
 					'Session': session_data
 				}
