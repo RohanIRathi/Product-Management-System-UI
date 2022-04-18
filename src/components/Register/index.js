@@ -82,10 +82,8 @@ const Register = () => {
 			alert(result.message);
 			navigate('/login/');
 		} catch (error) {
-			console.info(error);
 			setErrorList({'error': error});
 		}
-		console.debug(errorList);
 		setLoading(false);
 	};
 

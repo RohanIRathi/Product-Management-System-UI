@@ -10,7 +10,8 @@ import {
 	ADD_ORDER_URL,
 	FETCH_VERIFICATION_DETAILS_URL,
 	CHANGE_PASSWORD_URL,
-	FETCH_RETAILER_DETAILS_URL
+	FETCH_RETAILER_DETAILS_URL,
+	ORDER_PAID_URL
 } from './config';
 
 const defaultConfig = {
@@ -251,6 +252,21 @@ const apiFunctions = {
 		const data = await(
 			await(fetch(url, {
 				method: 'GET',
+				headers: {
+					'Session': session_data
+				}
+			}))
+			.then(response => {
+				return response.json();
+			})
+		);
+
+		return data;
+	},
+	orderPaid: async(order_id) => {
+		const session_data = sessionStorage.getItem('session_data');
+		const data = await(
+			await(fetch(ORDER_PAID_URL+order_id, {
 				headers: {
 					'Session': session_data
 				}

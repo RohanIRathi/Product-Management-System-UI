@@ -1,6 +1,8 @@
 // Configuration for Product Management System API
 
-const API_URL = 'https://yash-enterprises.herokuapp.com';
+// const API_URL = 'https://yash-enterprises.herokuapp.com';
+
+const API_URL = 'http://localhost:8000';
 
 // Authentication
 const LOGIN_URL = `${API_URL}/login/`;
@@ -18,6 +20,7 @@ const FETCH_RETAILER_DETAILS_URL = `${API_URL}/getRetailerDetails/`;
 const ADD_PRODUCT_URL = `${API_URL}/products/addProduct/`;
 const ADD_ORDER_URL = `${API_URL}/orders/addOrder/`;
 const CHANGE_PASSWORD_URL = `${API_URL}/changePassword/`;
+const ORDER_PAID_URL = `${API_URL}/orders/orderPaid?order=`;
 
 export {
 	API_URL,
@@ -31,5 +34,6 @@ export {
 	ADD_ORDER_URL,
 	FETCH_VERIFICATION_DETAILS_URL,
 	CHANGE_PASSWORD_URL,
-	FETCH_RETAILER_DETAILS_URL
+	FETCH_RETAILER_DETAILS_URL,
+	ORDER_PAID_URL
 };

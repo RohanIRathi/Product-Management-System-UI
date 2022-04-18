@@ -24,7 +24,7 @@ const ViewOrder = () => {
 			{ error ?
 				<Error text="Something Went Wrong" />
 				: order.id ?
-				<Order order={ order } />
+				<Order order={ order } order_id={ order_id } />
 				: <Spinner />
 			}
 		</Wrapper>

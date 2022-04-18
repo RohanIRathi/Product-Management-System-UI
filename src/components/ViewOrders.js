@@ -35,6 +35,7 @@ const ViewOrders = () => {
 	}
 
 	const { orders, error, loading } = useOrdersFetch();
+	console.log(orders);
 	if (error) {
 		return <Error text="Something Went Wrong" />;
 	}

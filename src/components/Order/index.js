@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Styles
 import {
@@ -16,19 +17,54 @@ import {
 	TableFooter
 } from './Order.styles';
 
-// Helpers
-import { calculateProductTotal } from '../../helpers';
+// Components
+import Spinner from '../Spinner';
+import Error from '../Error';
 
-const Order = ({ order }) => {
+// API
+import API from '../../API';
+
+// Helpers
+import { calculateProductTotal, CustomError } from '../../helpers';
+import Button from '../Button';
+
+// Context
+import { Context } from '../../context';
+
+const Order = ({ order, order_id }) => {
+	const user = useContext(Context)[0];
+	const navigate = useNavigate();
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(false);
 	const order_date = new Date(order.order_date);
 	let payment_date = "Payment Not Done";
 	if(order.order_paid) {
 		payment_date = <span>{ new Date(order.order_paid).toLocaleString() }</span>;
 	}
 
-	return (
+	const markPaid = async() => {
+		try {
+			setLoading(true);
+			setError(false);
+			// API call
+			const data = await API.orderPaid(order_id);
+			console.log(data);
+
+			if(!data.success) throw CustomError();
+			setLoading(false);
+			window.location.reload();
+		} catch {
+			setError(true);
+			setLoading(false);
+		}
+	};
+
+	return ( loading ?
+		<Spinner />
+		:
 		<Wrapper>
 			<Content>
+				{ error ? <Error text="Something Went Wrong" /> : null }
 				<OrderDate>
 					<div className="date">Order Date: <span>{ order_date.toLocaleString() }</span></div>
 					<div className="date">Payment Date: <span>{ payment_date }</span></div>
@@ -60,12 +96,9 @@ const Order = ({ order }) => {
 								<TableData>{ product.product.company } { product.product.series } { product.product.model }</TableData>
 								<TableData className="number">{ product.quantity }</TableData>
 								<TableData className="number">{ product.discount }</TableData>
-								<TableData className="number">{ calculateProductTotal(product) }</TableData>
+								<TableData className="number">{ calculateProductTotal(product).toFixed(2) }</TableData>
 							</TableRow>
 						))}
-						{/* <TableRow>
-							<TableData>Lava Z 6</TableData>
-						</TableRow> */}
 					</TableBody>
 					<TableFooter>
 						<TableRow>
@@ -76,6 +109,9 @@ const Order = ({ order }) => {
 						</TableRow>
 					</TableFooter>
 				</Table>
+				{ !user || !user.user || !user.user.is_superuser || !user.user.is_staff || order.order_paid ? null :
+					<Button text="Order Paid" type="button" theme="success" callback={ markPaid } />
+				}
 			</Content>
 		</Wrapper>
 	);

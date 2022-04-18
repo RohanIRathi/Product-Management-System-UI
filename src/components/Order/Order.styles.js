@@ -10,6 +10,11 @@ export const Content = styled.div`
 	display: flex;
 	height: 100%;
 	flex-direction: column;
+
+	Button {
+		align-self: flex-end;
+		margin: 20px;
+	}
 `;
 
 export const OrderDate = styled.div`
