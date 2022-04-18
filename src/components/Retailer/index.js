@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 // Styles
 import {
@@ -12,10 +12,6 @@ import {
 // Components
 import List from "../List";
 import ListItem from "../ListItem";
-import Button from "../Button";
-
-// Helpers
-import { increaseOrders } from "../../helpers";
 
 const titles = [
 	"Order Date",
