@@ -36,7 +36,7 @@ const SideNavbar = (props) => {
 				{ user && user.user && user.user.is_superuser && user.user.is_staff ?
 				<>
 					<Option href="/viewRetailers" active={ props.viewRetailers }>View Retailers</Option>
-					<Option href="/addRetailer" active={ props.addRetailer }>Add Retailer</Option>
+					{/* <Option href="/addRetailer" active={ props.addRetailer }>Add Retailer</Option> */}
 				</>
 				: null }
 				<Option href="/viewOrders" active={ props.viewOrders }>View Orders</Option>
@@ -53,7 +53,7 @@ const SideNavbar = (props) => {
 				{ user && user.user && user.user.is_superuser && user.user.is_staff ?
 				<>
 					<Option title="View Retailers" href="/viewRetailers" active={ props.viewRetailers }><FontAwesomeIcon icon={ faUsers } /></Option>
-					<Option title="Add Retailer" href="/addRetailer" active={ props.addRetailer }><FontAwesomeIcon icon={ faUserPlus } /></Option>
+					{ /* <Option title="Add Retailer" href="/addRetailer" active={ props.addRetailer }><FontAwesomeIcon icon={ faUserPlus } /></Option> **/ }
 				</>
 				: null }
 				<Option title="View Orders" href="/viewOrders" active={ props.viewOrders }><FontAwesomeIcon icon={ faReceipt } /></Option>
