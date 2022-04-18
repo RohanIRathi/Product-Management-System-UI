@@ -1,6 +1,6 @@
 // Configuration for Product Management System API
 
-const API_URL = 'http://127.0.0.1:8000';
+const API_URL = 'https://yash-enterprises.herokuapp.com';
 
 // Authentication
 const LOGIN_URL = `${API_URL}/login/`;
