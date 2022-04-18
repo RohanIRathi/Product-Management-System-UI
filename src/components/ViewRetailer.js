@@ -23,10 +23,8 @@ const ViewRetailer = () => {
 		:
 		<Wrapper>
 			<SideNavbar />
-			{ error ?
-			<Error text={ errorText } />
-			: null }
-			<Retailer retailer={ retailer } orders={ orders } />
+			{ error ? <Error text={ errorText } /> : 
+			<Retailer retailer={ retailer } orders={ orders } /> }
 		</Wrapper>
 	);
 };

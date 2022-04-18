@@ -36,16 +36,13 @@ const ViewRetailers = () => {
 	}
 
 	const { retailers, error, loading } = useRetailersFetch();
-	if (error) {
-		return <Error text="Something Went Wrong" />;
-	}
-
 	return (
 		loading ?
 		<Spinner />
 		:
 		<Wrapper>
 			<SideNavbar viewRetailers />
+			{ error ? <Error text="Something Went Wrong" /> :
 			<List>
 				{ titles.map((title, key) => (
 					<div style={{ 'width': (100/titles.length).toString() + "%" }} className="title-text" key={ key }>{ title }</div>
@@ -54,6 +51,7 @@ const ViewRetailers = () => {
 					<ListItem retailer={ retailer } key={ retailer.id } />
 				))}
 			</List>
+			}
 		</Wrapper>
 	)
 };

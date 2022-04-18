@@ -30,12 +30,14 @@ const CreateOrder = () => {
 
 	return ( loading ?
 		<Spinner />
-		: error ?
-		<Error text="Something Went Wrong" />
 		:
 		<Wrapper>
 			<SideNavbar createOrder />
+			{ error ?
+			<Error text="Something Went Wrong" />
+			:
 			<OrderForm user = { user.user } products={ products } />
+			}
 		</Wrapper>
 	);
 };

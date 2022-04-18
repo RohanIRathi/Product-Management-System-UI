@@ -18,10 +18,6 @@ const Home = () => {
 
 	const { products, error, loading } = useAllProductsFetch();
 
-	if(error) {
-		return <Error text="Something Went Wrong" />
-	}
-
 	return (
 		loading ?
 			<Spinner />
@@ -31,7 +27,9 @@ const Home = () => {
 			:
 			<Wrapper>
 				<SideNavbar home />
+				{ error ? <Error text="Something Went Wrong" /> :
 				<Products products={ products } />
+				}
 			</Wrapper>
 	);
 };

@@ -35,9 +35,6 @@ const ViewOrders = () => {
 	}
 
 	const { orders, error, loading } = useOrdersFetch();
-	if (error) {
-		return <Error text="Something Went Wrong" />;
-	}
 
 	return (
 		loading ?
@@ -45,6 +42,7 @@ const ViewOrders = () => {
 		:
 		<Wrapper>
 			<SideNavbar viewOrders />
+			{ error ? <Error text="Something Went Wrong" /> :
 			<List>
 				{ titles.map((title, key) => (
 					<div style={{ 'width': (100/titles.length).toString() + "%" }} className="title-text" key={ key }>{ title }</div>
@@ -53,6 +51,7 @@ const ViewOrders = () => {
 					<ListItem order={ order } key={ order.id } />
 				))}
 			</List>
+			}
 		</Wrapper>
 	);
 };

@@ -17,9 +17,10 @@ const ViewProducts = () => {
 		<Spinner />
 		:
 		<Wrapper>
-			{ error ? <Error text="Something Went Wrong" /> : null }
 			<SideNavbar products />
+			{ error ? <Error text="Something Went Wrong" /> :
 			<Products products={ products } />
+			}
 		</Wrapper>
 	);
 };

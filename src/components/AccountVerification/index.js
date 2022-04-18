@@ -93,11 +93,10 @@ const AccountVerification = ({ retailer, token }) => {
 
 	return ( loading ?
 		<Spinner />
-		: error ?
-		<Error text={ errorText } />
 		:
 		<Wrapper>
 			<Content>
+				{ error ? <Error text={ errorText } /> : null }
 				<Table>
 					<TableBody>
 						<TableRow>
