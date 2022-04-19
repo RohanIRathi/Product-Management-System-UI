@@ -29,7 +29,7 @@ export const useRetailersFetch = () => {
 			}
 		} else {
 			setRetailers([user_id]);
-			setError(true);
+			setError(false);
 		}
 	};
 
